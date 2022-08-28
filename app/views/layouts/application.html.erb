@@ -10,7 +10,13 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+  <div class="navibar">
+    <%= link_to 'breweries', breweries_path %>
+    <%= link_to 'beers', beers_path %>
+  </div>
+
+  <%= yield %>
+
+</body>
 </html>
