@@ -1,10 +1,8 @@
 class Beer < ApplicationRecord
-  belongs_to :brewery
-  has_many :ratings
+  include RatingAverage
 
-  def average_rating
-    self.ratings.map {|i| i.score}.sum.to_f / self.ratings.length
-  end
+  belongs_to :brewery
+  has_many :ratings, dependent: :destroy
 
   def to_s
     "#{self.name} #{self.brewery.name}"

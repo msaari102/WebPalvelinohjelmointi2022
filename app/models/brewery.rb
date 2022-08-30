@@ -1,5 +1,8 @@
 class Brewery < ApplicationRecord
-  has_many :beers
+  include RatingAverage
+
+  has_many :beers, dependent: :destroy
+  has_many :ratings, through: :beers
 
   def year
     read_attribute(:year)
@@ -19,4 +22,5 @@ class Brewery < ApplicationRecord
     self.year = 2022
     puts "changed year to #{year}"
   end
+  
 end
