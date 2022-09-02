@@ -1,6 +1,6 @@
 <div id="<%= dom_id rating %>">
   <p>
-    <%= rating.beer.name %> <%= rating.score %>
+    <%= rating.beer.name %> <%= rating.score %> <%= link_to rating.user.username, user_path(rating.user) %>
   </p>
 
 </div>
