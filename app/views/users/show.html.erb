@@ -6,6 +6,15 @@
     <%= "Has made #{pluralize(@user.ratings.count, 'rating')}, average rating #{@user.average_rating}" %>
   </p>
 
+  <h3>member of</h3>
+    <ul>
+    <% @user.beer_clubs.each do |beer_club| %>
+      <li id="<%= dom_id beer_club %>">
+        <%= link_to beer_club.name, beer_club %>
+      </li>
+    <% end %>
+  </ul>
+
   <strong>ratings</strong>
   <p id="ratings">
   <% @user.ratings.each do |rating| %>
