@@ -14,6 +14,7 @@ class MembershipsController < ApplicationController
   def new
     @membership = Membership.new
     @beer_clubs = BeerClub.all
+    @user = current_user
   end
 
   # GET /memberships/1/edit
