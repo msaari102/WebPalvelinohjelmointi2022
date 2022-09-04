@@ -4,7 +4,7 @@ class Brewery < ApplicationRecord
   has_many :beers, dependent: :destroy
   has_many :ratings, through: :beers
 
-  #validates :year, numericality: { greater_than_or_equal_to: 1040,
+  # validates :year, numericality: { greater_than_or_equal_to: 1040,
   #  less_than_or_equal_to: 2022,
   #  only_integer: true }
 
@@ -12,11 +12,10 @@ class Brewery < ApplicationRecord
 
   validate :year_limits
 
-def year_limits
-  if year.present? && year < 1040 || year > Date.today.year
+  def year_limits
+    (return unless (year.present? && year < 1040) || year > Date.today.year)
     errors.add(:year, "Year must be between this year and 1040")
   end
-end
 
   def year
     read_attribute(:year)
