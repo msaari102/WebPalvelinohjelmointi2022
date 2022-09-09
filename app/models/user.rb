@@ -11,4 +11,24 @@ class User < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :beer_clubs, through: :memberships
   has_secure_password
+
+  def favorite_beer
+    return nil if ratings.empty?
+
+    ratings.order(score: :desc).limit(1).first.beer
+  end
+
+  def favorite_style
+    return nil if ratings.empty?
+
+    tulos = ratings.group_by { |i| i.beer.style }.transform_values { |i| i.inject(0) { |sum, n| sum + n.score } / i.count.to_f }
+    tulos.min { |a, b| b[1] <=> a[1] }[0]
+  end
+
+  def favorite_brewery
+    return nil if ratings.empty?
+
+    tulos = ratings.group_by { |i| i.beer.brewery.name }.transform_values { |i| i.inject(0) { |sum, n| sum + n.score } / i.count.to_f }
+    tulos.min { |a, b| b[1] <=> a[1] }[0]
+  end
 end
