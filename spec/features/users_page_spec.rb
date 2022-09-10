@@ -59,7 +59,7 @@ describe "User" do
       sign_in(username: "migi", password: "Foobar1")
       visit user_path(user1)
       expect(Rating.count).to eq(3)
-      within(find_by_id("rating_2")) do
+      within(find_by_id("rating_#{review2.id}")) do
         click_link('Delete')
       end
       expect(Rating.count).to eq(2)
