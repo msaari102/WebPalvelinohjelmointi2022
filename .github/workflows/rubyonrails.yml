@@ -48,3 +48,12 @@ jobs:
        uses: andrewmcodes-archive/rubocop-linter-action@v3.3.0
        env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "glacial-springs-19377" #Must be unique in Heroku
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
