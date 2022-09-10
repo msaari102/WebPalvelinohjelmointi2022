@@ -48,4 +48,48 @@ describe "User" do
       expect(page).not_to have_content "anonymous 13"
     end
   end
+
+  describe "Ratings can be deleted" do
+    let!(:user1) { FactoryBot.create :user, username: 'migi' }
+    let!(:review1) { FactoryBot.create :rating, user: user1, score: 11 }
+    let!(:review2) { FactoryBot.create :rating, user: user1, score: 12 }
+    let!(:review3) { FactoryBot.create :rating, user: user1, score: 13 }
+
+    it "from user's page" do
+      sign_in(username: "migi", password: "Foobar1")
+      visit user_path(user1)
+      expect(Rating.count).to eq(3)
+      within(find_by_id("rating_2")) do
+        click_link('Delete')
+      end
+      expect(Rating.count).to eq(2)
+      expect(page).to have_content "anonymous 11"
+      expect(page).to have_content "anonymous 13"
+    end
+  end
+
+  describe "Favorite" do
+    let!(:user1) { FactoryBot.create :user, username: 'migi' }
+    let!(:brewery1) { FactoryBot.create :brewery, name: 'Koff'}
+    let!(:brewery2) { FactoryBot.create :brewery, name: 'Olvi'}
+    let!(:brewery3) { FactoryBot.create :brewery, name: 'Sandels'}
+    let!(:beer1) { FactoryBot.create :beer, name: "Iso 1", style: 'APA', brewery: brewery1}
+    let!(:beer2) { FactoryBot.create :beer, name: "Iso 2", style: 'IPA', brewery: brewery2}
+    let!(:beer3) { FactoryBot.create :beer, name: "Iso 3", style: 'OPA', brewery: brewery3}
+    let!(:review1) { FactoryBot.create :rating, user: user1, score: 11, beer: beer1 }
+    let!(:review2) { FactoryBot.create :rating, user: user1, score: 22, beer: beer2 }
+    let!(:review3) { FactoryBot.create :rating, user: user1, score: 13, beer: beer3 }
+
+    it "style is found" do
+      sign_in(username: "migi", password: "Foobar1")
+      visit user_path(user1)
+      expect(page).to have_content "Favorite style: IPA"
+    end
+
+    it "brewery is found" do
+      sign_in(username: "migi", password: "Foobar1")
+      visit user_path(user1)
+      expect(page).to have_content "Favorite brewery: Olvi"
+    end
+  end
 end
