@@ -5,6 +5,8 @@ describe "Beers page" do
   describe "when adding beer" do
     before :each do
       FactoryBot.create(:brewery, name: "Koff", year: 1912)
+      FactoryBot.create(:user)
+      sign_in(username: "Pekka", password: "Foobar1")
     end
 
     it "with valid name" do
