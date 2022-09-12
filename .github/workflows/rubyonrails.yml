@@ -4,6 +4,10 @@
 #
 # This workflow will install a prebuilt Ruby version, install dependencies, and
 # run tests and linters.
+env:
+  BEERMAPPING_APIKEY: "048d0f8d3409c5ab7c0c6ef4ad1f62de"
+
+
 name: "Ruby on Rails CI"
 on:
   push:

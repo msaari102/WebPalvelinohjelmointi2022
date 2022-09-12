@@ -3,9 +3,9 @@ require 'rails_helper'
 include Helpers
 
 describe "Rating" do
-  let!(:brewery) { FactoryBot.create :brewery, name: "Koff" }
-  let!(:beer1) { FactoryBot.create :beer, name: "iso 3", brewery:brewery }
-  let!(:beer2) { FactoryBot.create :beer, name: "Karhu", brewery:brewery }
+  let!(:brewery) { FactoryBot.create :brewery, name:"Koff" }
+  let!(:beer1) { FactoryBot.create :beer, name:"iso 3", brewery:brewery }
+  let!(:beer2) { FactoryBot.create :beer, name:"Karhu", brewery:brewery }
   let!(:user) { FactoryBot.create :user }
 
   before :each do
@@ -26,15 +26,8 @@ describe "Rating" do
     expect(beer1.average_rating).to eq(15.0)
   end
 
-  it "when there aren't any ratings" do
-    visit ratings_path
-    expect(page).to have_content "Total ratings: #{Rating.count}"
-  end
-
-  it "when there are two ratings" do
-    FactoryBot.create :rating, user: user
-    FactoryBot.create :rating, user: user
-    visit ratings_path
-    expect(page).to have_content "Total ratings: #{Rating.count}"
-  end
 end
+
+# rspec spec/features/ratings_page_spec.rb
+
+# save_and_open_page

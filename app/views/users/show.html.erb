@@ -1,44 +1,54 @@
 <p style="color: green"><%= notice %></p>
 
-<p>
-    <strong>Username:</strong>
-    <p> <%= @user.username %> </p>
-    <%= "Has made #{pluralize(@user.ratings.count, 'rating')}, average rating #{@user.average_rating}" %>
-  </p>
+<h2><%= @user.username %></h2>
 
-  <div>
-    <strong>Favorite style: </strong><%= @user.favorite_style%>
-  </div>
+<% if @user.beer_clubs.empty? %>
+  Has not joined any club
+<% else %>
+  <h4>memberships</h4>
 
-  <div>
-    <strong>Favorite brewery: </strong><%= @user.favorite_brewery%>
-  </div>
-
-  <h3>member of</h3>
-    <ul>
-    <% @user.beer_clubs.each do |beer_club| %>
-      <li id="<%= dom_id beer_club %>">
-        <%= link_to beer_club.name, beer_club %>
-      </li>
+  <ul>
+    <% @user.beer_clubs.each do |club| %>
+      <li>
+        <%= link_to club.name, club %>
+      </il>
     <% end %>
   </ul>
+<% end %>
 
-  <strong>ratings</strong>
-<ul>
-  <% @user.ratings.each do |rating| %>
-    <li id="<%= dom_id rating %>">
-      <%= "#{rating.to_s}" %>
-      <% if @user == current_user %>
-        <%= link_to "Delete", rating, data: {turbo_method: :delete} %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+<% if @user.ratings.empty? %>
+  Has not yet made ratings
+<% else %>  
+  <div>
+    Has made <%= pluralize(@user.ratings.count, 'rating') %> with an average of <%= @user.average_rating %>
+  </div>  
 
-<div> 
-  <%= link_to "Back to users", users_path %>
-  <% if @user == current_user %>
-    | <%= link_to "Edit this user", edit_user_path(@user) %>
+  <div>
+    Favorite style <%= @user.favorite_style %>
+  </div>
+
+  <div>
+    Favorite brewery <%= @user.favorite_brewery.name %>
+  </div>
+
+  <h4>ratings</h4>
+
+  <ul>
+    <% @user.ratings.each do |rating| %>
+      <li>
+        <%= "#{rating.score} #{rating.beer.name}" %>
+        <% if @user == current_user %>
+          <%= button_to 'delete', rating, method: :delete, form: { style: 'display:inline-block;',  data: { 'turbo-confirm': 'Are you sure?' } } %>
+        <% end %>
+      </il>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @user == current_user %>
+  <div>
+    <%= link_to "Change password", edit_user_path(@user) %> |
+
     <%= button_to "Destroy this user", @user, method: :delete %>
-  <% end %>
-</div>
+  </div>
+<% end %>

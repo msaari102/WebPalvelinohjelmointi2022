@@ -3,11 +3,10 @@ require 'rails_helper'
 describe "Breweries page" do
   it "should not have any before been created" do
     visit breweries_path
-    expect(page).to have_content 'Breweries'
+    expect(page).to have_content 'Listing breweries'
     expect(page).to have_content 'Number of breweries: 0'
-
   end
-
+  
   describe "when breweries exists" do
     before :each do
       # jotta muuttuja näkyisi it-lohkoissa, tulee sen nimen alkaa @-merkillä
@@ -31,7 +30,7 @@ describe "Breweries page" do
       click_link "Koff"
 
       expect(page).to have_content "Koff"
-      expect(page).to have_content "Established in: 1897"
+      expect(page).to have_content "Established at 1897"
     end
 
   end

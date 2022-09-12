@@ -18,17 +18,23 @@ class User < ApplicationRecord
     ratings.order(score: :desc).limit(1).first.beer
   end
 
+  def favorite_by(my_ratings, criteria)
+    by_criteria = my_ratings
+                  .group_by { |rating| rating.beer.send(criteria) }
+                  .map { |key, val| [key, val.sum(&:score) / val.size] }
+
+    by_criteria.max_by(&:last).first
+  end
+
   def favorite_style
     return nil if ratings.empty?
 
-    tulos = ratings.group_by { |i| i.beer.style }.transform_values { |i| i.inject(0) { |sum, n| sum + n.score } / i.count.to_f }
-    tulos.min { |a, b| b[1] <=> a[1] }[0]
+    favorite_by(ratings, :style)
   end
 
   def favorite_brewery
     return nil if ratings.empty?
 
-    tulos = ratings.group_by { |i| i.beer.brewery.name }.transform_values { |i| i.inject(0) { |sum, n| sum + n.score } / i.count.to_f }
-    tulos.min { |a, b| b[1] <=> a[1] }[0]
+    favorite_by(ratings, :brewery)
   end
 end

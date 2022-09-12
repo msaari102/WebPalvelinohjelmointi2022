@@ -1,30 +1,40 @@
 require 'rails_helper'
 
-describe "Beers page" do
+include Helpers
 
-  describe "when adding beer" do
-    before :each do
-      FactoryBot.create(:brewery, name: "Koff", year: 1912)
-      FactoryBot.create(:user)
-      sign_in(username: "Pekka", password: "Foobar1")
-    end
-
-    it "with valid name" do
-      visit new_beer_path
-      fill_in('beer_name', with: 'Lapin Kulta')
-      expect{
-        click_button('Create Beer')
-      }.to change{Beer.count}.by(1)
-    end
-
-    it "without name" do
-      visit new_beer_path
-      fill_in('beer_name', with: '')
-      click_button('Create Beer')
-      expect(current_path).to eq(beers_path)
-      expect(page).to have_content 'Name can\'t be blank'
-      expect(Beer.count).to eq(0)
-    end
-
+describe "Beers" do
+  before :each do 
+    FactoryBot.create(:brewery, name: "Schlenkerla", year: 1678)
+    FactoryBot.create :user
+    sign_in(username: "Pekka", password: "Foobar1")
   end
+
+  it "can be created with valid input" do
+    visit new_beer_path
+    fill_in('beer[name]', with: 'Helles')
+    select('Lager', from: 'beer[style]')
+    select('Schlenkerla', from: 'beer[brewery_id]')
+  
+    expect{
+      click_button('Create Beer')
+    }.to change{Beer.count}.by(1)
+  end
+  
+
+  it "can not be created with without a name" do
+    visit new_beer_path
+    select('Lager', from: 'beer[style]')
+    select('Schlenkerla', from: 'beer[brewery_id]')
+  
+    expect{
+      click_button('Create Beer')
+    }.to change{Beer.count}.by(0)
+
+    expect(page).to have_content "Name can't be blank"
+  end
+
 end
+
+# rspec spec/features/beers_page_spec.rb
+
+# save_and_open_page
