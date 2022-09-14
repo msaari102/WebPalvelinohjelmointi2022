@@ -84,4 +84,6 @@ group :test do
   gem 'webmock'
 end
 
+group :development, :test do gem 'pry-byebug' end
+
 gem 'httparty'
