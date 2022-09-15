@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :beers
   resources :breweries
   resource :session, only: [:new, :create, :destroy]
+  resources :styles
   root 'breweries#index'
   get 'kaikki_bisset', to: 'beers#index'
   get 'signup', to: 'users#new'
