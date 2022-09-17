@@ -5,6 +5,9 @@ describe "Places" do
     allow(BeermappingApi).to receive(:places_in).with("kumpula").and_return(
       [ Place.new( name: "Oljenkorsi", id: 1 ) ]
     )
+    allow(WeatherApi).to receive(:places_in).with("kumpula").and_return(
+      Weather.new( temperature: "12", weather_icons: [], wind_speed: "1", wind_dir: "N" )
+    )
 
     visit places_path
     fill_in('city', with: 'kumpula')
@@ -19,6 +22,9 @@ describe "Places" do
         Place.new( name: "Vipuvarsi", id: 2 ),
         Place.new( name: "Ruusu", id: 3 ) ]
     )
+    allow(WeatherApi).to receive(:places_in).with("kumpula").and_return(
+      Weather.new( temperature: "12", weather_icons: [], wind_speed: "1", wind_dir: "N" )
+    )
 
     visit places_path
     fill_in('city', with: 'kumpula')
@@ -32,6 +38,9 @@ describe "Places" do
   it "if none is returned by the API, error message is shown at the page" do
     allow(BeermappingApi).to receive(:places_in).with("kumpula").and_return(
       []
+    )
+    allow(WeatherApi).to receive(:places_in).with("kumpula").and_return(
+      Weather.new( temperature: "12", weather_icons: [], wind_speed: "1", wind_dir: "N" )
     )
 
     visit places_path

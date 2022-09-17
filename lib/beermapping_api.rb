@@ -27,5 +27,6 @@ class BeermappingApi
 
   # def self.key
   #  export BEERMAPPING_APIKEY="048d0f8d3409c5ab7c0c6ef4ad1f62de"
+  # BEERMAPPING_APIKEY="048d0f8d3409c5ab7c0c6ef4ad1f62de" WEATHER_APIKEY="7c978be4aa6c3baccc6f34221846af2f" rails s
   # end
 end
