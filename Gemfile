@@ -87,3 +87,7 @@ end
 group :development, :test do gem 'pry-byebug' end
 
 gem 'httparty'
+
+gem 'bootstrap', '~> 5.2.0'
+gem 'jquery-rails'
+gem 'mini_racer'

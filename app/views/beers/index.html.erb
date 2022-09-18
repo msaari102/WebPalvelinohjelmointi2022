@@ -1,26 +1,31 @@
-<p style="color: green"><%= notice %></p>
+
 
 <h1>Beers</h1>
 
 <div id="beers">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Beer</th>
+      <th scope="col">Style</th>
+      <th scope="col">Brewery</th>
+      <th scope="col">Rating</th>
+    </tr>
+  </thead>
+
   <% @beers.each do |beer| %>
-    <div id="<%= dom_id beer %>">
-      <p>
-      <strong>Name:</strong> 
-        <%= link_to beer.name, beer %>
-      </p>
-    
-      <p>
-        <strong>Style:</strong>
-        <%= beer.style.name %>
-      </p>
-    
-    </div>
+    <tr id="<%= dom_id beer %>">
+      <th><%= link_to beer.name, beer %></th>
+      <th><%= link_to beer.style.name, beer.style %></th>
+      <th><%= link_to beer.brewery.name, beer.brewery %></th>
+      <th><%= beer.average_rating  %></th>
+    </tr>
   <% end %>
 </div>
+</table>
 
 <p>
 <%= link_to 'list of breweries', breweries_path %>
 </p>
 
-<%= link_to('New Beer', new_beer_path) if current_user %>
+<%= link_to('New Beer', new_beer_path, class:'btn btn-primary') if current_user %>
