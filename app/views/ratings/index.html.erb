@@ -9,6 +9,85 @@
   <% end %>
 </ul>
 
+<div class="container text-center">
+  <div class="row">
+    <div class="col" id="bestBeers">
+        <h2>Best beers</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Beer</th>
+        <th scope="col">Average</th>
+      </tr>
+    </thead>
+
+    <% @beers.each do |beer| %>
+      <tr id="<%= dom_id beer %>">
+        <th><%= beer.name  %></th>
+        <th><%= beer.average_rating  %></th>
+      </tr>
+    <% end %>
+  </table>
+    </div>
+    <div class="col" id="bestBreweries">
+        <h2>Best breweries</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Brewery</th>
+        <th scope="col">Rating</th>
+      </tr>
+    </thead>
+
+    <% @breweries.each do |brewery| %>
+      <tr id="<%= dom_id brewery %>">
+        <th><%= brewery.name %></th>
+        <th><%= brewery.average_rating  %></th>
+      </tr>
+    <% end %>
+  </table>
+    </div>
+    <div class="col" id="bestStyles">
+      <h2>Best styles</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Style</th>
+        <th scope="col">Rating</th>
+      </tr>
+    </thead>
+
+    <% @styles.each do |style| %>
+      <tr id="<%= dom_id style %>">
+        <th><%= style.name %></th>
+        <th><%= style.average_rating  %></th>
+      </tr>
+    <% end %>
+  </table>
+    </div>
+  </div>
+</div>
+
+<p id="bestUsers">
+<h2>Most active users</h2>
+    <% @users.each_with_index do |user, i| %>
+      <div id="<%= dom_id user %>">
+      <%= i+1 %>. <%= user.username %> <%= user.ratings.count  %> ratings
+      </div>
+    <% end %>
+</p>
+
+<p id="recentRatings">
+<h2>Recent ratings</h2>
+  <ul>
+    <% Rating.recent.each do |rating| %>
+      <li id="<%= dom_id rating %>">
+      <%= rating.beer %> <%= rating.score %> <%= rating.created_at %>
+      </li>
+    <% end %>
+  </ul>
+</p>
+
 <p>
-<%= link_to("New rating", new_rating_path, class:'btn btn-primary') %>
+  <%= link_to("New rating", new_rating_path, class:'btn btn-primary') %>
 </p>

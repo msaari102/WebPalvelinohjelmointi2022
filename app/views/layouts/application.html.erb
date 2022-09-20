@@ -41,18 +41,25 @@
             </li>
             |
             <% if current_user %>
-              <li class="nav-item">
-                <%= link_to "#{current_user.username}", current_user , { class: "nav-link" } %>
+                  <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">      <span class="navbar-toggler-icon"></span>
+
+          </a>
+          <ul class="dropdown-menu">
+            <li class="nav-item">
+                <%= link_to "My page", current_user , { class: "dropdown-item" } %>
               </li>
               <li class="nav-item">
-                <%= link_to "Rate a beer", new_rating_path , { class: "nav-link" } %>
+                <%= link_to "Rate a new beer", new_rating_path , { class: "dropdown-item" } %>
               </li>
               <li class="nav-item">
-                <%= link_to "Join a club", new_membership_path , { class: "nav-link" } %>
+                <%= link_to "Join a club", new_membership_path , { class: "dropdown-item" } %>
               </li>
               <li class="nav-item">
-                <%= link_to "Sign out", signout_path, class: "nav-link", data: {turbo_method: :delete} %>
+                <%= link_to "Sign out", signout_path, class: "dropdown-item", data: {turbo_method: :delete} %>
               </li>
+          </ul>
+        </li>
             <% else %>
               <li class="nav-item">
                 <%= link_to "Sign up", signup_path , { class: "nav-link" } %>
@@ -65,6 +72,9 @@
         </div>
       </div>
     </nav>
+
+
+
 
     <div class="container">
       <% if notice %>

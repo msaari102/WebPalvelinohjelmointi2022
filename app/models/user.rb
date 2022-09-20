@@ -37,4 +37,8 @@ class User < ApplicationRecord
 
     favorite_by(ratings, :brewery)
   end
+
+  def self.top(num)
+    User.all.sort_by{ |b| b.ratings.count }.reverse.first(num)
+  end
 end
