@@ -1,16 +1,7 @@
-
+<p style="color: green"><%= notice %></p>
 
 <%= render @style %>
 
-<h3>beers: </h3>
-<ul>
-<% @style.beers.each do |beer| %>
-  <li>
-        <%= beer.name %>
-      </li>
-  <% end %>
-  </ul>
-
 <div>
-  <%= link_to "Back to styles", styles_path %>
+<%= edit_and_destroy_buttons(@style) %>
 </div>

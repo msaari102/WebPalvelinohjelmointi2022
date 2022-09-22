@@ -4,7 +4,14 @@
 
 <div>
   <% @styles.each do |style| %>
-    <%= render style %>
+    <div id="<%= dom_id style %>">
+  <p>
+    <b>Name:</b><%= style.name %> 
+  </p>
+  <p>
+    <b>Description: </b><%= style.description %>
+  </p>
+</div>
     <p>
         <%= link_to "Show this style", style %>
       </p>

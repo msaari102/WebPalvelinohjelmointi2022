@@ -60,7 +60,7 @@
     <% @styles.each do |style| %>
       <tr id="<%= dom_id style %>">
         <th><%= style.name %></th>
-        <th><%= style.average_rating  %></th>
+        <th><%= round(style.average_rating)  %></th>
       </tr>
     <% end %>
   </table>

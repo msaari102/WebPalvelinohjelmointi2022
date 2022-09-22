@@ -4,4 +4,28 @@
     <%= user.username %>
   </p>
 
+  <p>
+  <% if user.closed  %>
+        <span class="badge bg-secondary">closed</span>
+  <% end %>
+</p>
+
+<p>
+<% if user.ratings.empty? %>
+  Has not yet made ratings
+<% else %>  
+  <div>
+    Has made <%= pluralize(user.ratings.count, 'rating') %> with an average of <%= user.average_rating %>
+  </div>  
+
+  <div>
+    Favorite style <%= user.favorite_style.name %>
+  </div>
+
+  <div>
+    Favorite brewery <%= user.favorite_brewery.name %>
+  </div>
+<% end %>
+</p>  
+
 </div>

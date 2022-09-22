@@ -59,6 +59,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def toggle_status
+    user = User.find(params[:id])
+    user.update_attribute :closed, !user.closed
+    redirect_to user
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
