@@ -6,12 +6,12 @@
           1,
           1,
           0,
-          0,
-          0,
-          null,
           null,
           0,
+          0,
           null,
+          null,
+          0,
           null,
           null,
           1,
@@ -186,7 +186,6 @@
       "/home/mts/ratebeer/app/controllers/sessions_controller.rb": {
         "lines": [
           1,
-          null,
           1,
           null,
           null,
@@ -195,14 +194,12 @@
           6,
           6,
           0,
-          null,
-          null,
           6,
+          null,
           5,
           5,
           null,
           1,
-          null,
           null,
           null,
           null,
@@ -233,7 +230,6 @@
           null,
           1,
           0,
-          null,
           null,
           null
         ]
@@ -962,6 +958,6 @@
         }
       }
     },
-    "timestamp": 1663866755
+    "timestamp": 1663868636
   }
 }
