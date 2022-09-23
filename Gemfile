@@ -51,3 +51,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'webmock'
 end
+
+gem 'bootstrap', '~> 5.2.0'
+gem 'jquery-rails'
+gem 'mini_racer'
