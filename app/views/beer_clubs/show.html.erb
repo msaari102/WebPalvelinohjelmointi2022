@@ -1,13 +1,23 @@
-
-
 <%= render @beer_club %>
 
-<h3>members</h3>
+  <h3>confirmed members</h3>
   <p>
-  <% @beer_club.users.each do |user| %>
-    <%= link_to user.username, user %>
+  <% @membership_confirmed.each do |member| %>
+    <%= link_to member.user.username, member.user %>
   <% end %>
   </p>
+
+  <% if @is_member %>
+  <p>
+    <h3>membership applications</h3>
+    <% @membership_applied.each do |member| %>
+    <div>
+      <%= link_to member.user.username, member.user %>
+      <%= button_to "Confirm", toggle_confirmed_membership_path(member.id), data: {turbo_method: "post"}, class: "btn btn-primary" %>
+    </div>
+    <% end %>
+    </p>
+  <% end %>
 
 <% if current_user %>
   <% if !@beer_club.users.include? (current_user) %>
@@ -23,7 +33,7 @@
 <% end %>  
 
 <div>
-  <%= link_to("Edit this beer club", edit_beer_club_path(@beer_club)) if current_user %> |
+  <%= link_to("Edit this beer club", edit_beer_club_path(@beer_club)) if current_user %>
   <%= link_to "Back to beer clubs", beer_clubs_path %>
 
   <%= button_to("Destroy this beer club", @beer_club, method: :delete, class: 'btn btn-danger') if current_user && current_user.admin %>

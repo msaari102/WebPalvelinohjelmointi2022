@@ -61,6 +61,15 @@ class MembershipsController < ApplicationController
     end
   end
 
+  def toggle_confirmed
+    membership = Membership.find(params[:id])
+    membership.update_attribute :confirmed, true
+    respond_to do |format|
+      format.html { redirect_to beer_club_url(membership.beer_club), notice: "New member approved" }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

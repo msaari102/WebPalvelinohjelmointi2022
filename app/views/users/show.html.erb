@@ -12,15 +12,28 @@
 <% if @user.beer_clubs.empty? %>
   Has not joined any club
 <% else %>
-  <h4>memberships</h4>
+  <h3>Beer clubs </h3>
+  <div>
+    <h4>member of</h4>
+    <ul>
+      <% @membership_confirmed.each do |membership| %>
+        <li>
+          <%= link_to membership.beer_club.name, membership.beer_club %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 
-  <ul>
-    <% @user.beer_clubs.each do |club| %>
-      <li>
-        <%= link_to club.name, club %>
-      </li>
-    <% end %>
-  </ul>
+  <div>
+    <h4>applied membership of</h4>
+    <ul>
+      <% @membership_applied.each do |membership| %>
+        <li>
+          <%= link_to membership.beer_club.name, membership.beer_club %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 
 <% if @user.ratings.empty? %>
