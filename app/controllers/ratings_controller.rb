@@ -1,4 +1,6 @@
 class RatingsController < ApplicationController
+  before_action :expireBrewerylist, only: [:create, :destroy]
+
   def index
     @ratings = Rating.all
     @beers = Beer.top(3)

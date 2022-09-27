@@ -15,4 +15,8 @@ class ApplicationController < ActionController::Base
   def ensure_admin
     redirect_to signin_path, notice: 'only admins can remove items from database' if !current_user.admin?
   end
+
+  def expireBrewerylist
+    expire_fragment('brewerylist')
+  end
 end

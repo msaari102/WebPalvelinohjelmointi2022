@@ -2,10 +2,12 @@ class BreweriesController < ApplicationController
   before_action :set_brewery, only: %i[show edit update destroy]
   before_action :ensure_that_signed_in, except: [:index, :show, :list]
   before_action :ensure_admin, only: [:destroy]
+  before_action :expireBrewerylist, only: [:create, :update, :destroy]
 
   # GET /breweries or /breweries.json
   def index
-    @breweries = Brewery.all
+    return if request.format.html? && fragment_exist?('brewerylist')
+    @breweries = Brewery.all 
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
   end
@@ -84,4 +86,5 @@ class BreweriesController < ApplicationController
   def brewery_params
     params.require(:brewery).permit(:name, :year, :active)
   end
+
 end
