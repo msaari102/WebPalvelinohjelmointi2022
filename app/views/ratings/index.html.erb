@@ -1,4 +1,4 @@
-
+<% cache 'top_ratings', expires_in:10.minutes do %>
 
 <h1>List of ratings</h1>
 <p>Total ratings: <%= @ratings.count %></p>
@@ -29,8 +29,9 @@
     <% end %>
   </table>
     </div>
-    <div class="col" id="bestBreweries">
-        <h2>Best breweries</h2>
+    
+<div class="col" id="bestBreweries">
+  <h2>Best breweries</h2>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -38,7 +39,6 @@
         <th scope="col">Rating</th>
       </tr>
     </thead>
-
     <% @breweries.each do |brewery| %>
       <tr id="<%= dom_id brewery %>">
         <th><%= brewery.name %></th>
@@ -46,9 +46,11 @@
       </tr>
     <% end %>
   </table>
-    </div>
-    <div class="col" id="bestStyles">
-      <h2>Best styles</h2>
+</div>
+    
+    
+<div class="col" id="bestStyles">
+  <h2>Best styles</h2>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -56,7 +58,6 @@
         <th scope="col">Rating</th>
       </tr>
     </thead>
-
     <% @styles.each do |style| %>
       <tr id="<%= dom_id style %>">
         <th><%= style.name %></th>
@@ -91,3 +92,4 @@
 <p>
   <%= link_to("New rating", new_rating_path, class:'btn btn-primary') %>
 </p>
+<% end %>

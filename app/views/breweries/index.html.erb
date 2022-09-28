@@ -25,6 +25,34 @@
     </table>
   </div>
 
+  <h2>Retired</h2>
+
+<p> Number of retired breweries: <%= @retired_breweries.count %> </p>
+
+<div id="retired_breweries">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Brewery</th>
+        <th scope="col">Established</th>
+        <th scope="col">Beers</th>
+        <th scope="col">Average rating</th>
+      </tr>
+    </thead>
+
+    <% @retired_breweries.each do |brewery| %>
+      <tr id="<%= dom_id brewery %>">
+        <th><%= link_to brewery.name, brewery %></th>
+        <th><%= brewery.year %></th>
+        <th><%= brewery.beers.count %></th>
+        <th><%= brewery.average_rating %></th>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
 <% end %>
+
+<p><%= link_to 'list of beers', beers_path %></p>
 
 <%= link_to("New brewery", new_brewery_path, class: "btn btn-primary") if current_user %>

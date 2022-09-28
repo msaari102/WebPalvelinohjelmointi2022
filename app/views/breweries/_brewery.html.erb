@@ -1,3 +1,4 @@
+<% cache @brewery do %>
 <div id="<%= dom_id brewery %>">
   <h2>
     <%= link_to brewery.name, brewery %>
@@ -14,11 +15,26 @@
     Beers count: <%= brewery.beers.count%>
   </p>
 
-  <p>
-    <% brewery.beers.each do |beer| %>
-      <%= link_to beer.name, beer %>
+<div id="beers">
+<h2>Beers</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Style</th>
+        <th scope="col">Rating</th>
+      </tr>
+    </thead>
+
+    <% @brewery.beers.each do |beer| %>
+      <tr id="<%= dom_id beer %>">
+        <th><%= link_to beer.name, beer %></th>
+        <th><%= link_to beer.style.name, beer.style %></th>
+        <th><%= beer.average_rating %></th>
+      </tr>
     <% end %>
-  </p>
+  </table>
+</div>
 
   <% if brewery.ratings.empty? %>
     brewery has not yet been rated!
@@ -27,3 +43,5 @@
   <% end %>
 
 </div>
+
+<% end %>
