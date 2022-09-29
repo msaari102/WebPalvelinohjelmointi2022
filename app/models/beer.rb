@@ -1,4 +1,5 @@
 class Beer < ApplicationRecord
+  extend Top
   include RatingAverage
 
   belongs_to :brewery, touch: true
@@ -21,7 +22,8 @@ class Beer < ApplicationRecord
     ratings.map(&:score).sum / ratings.count.to_f
   end
 
-  def self.top(num)
-    Beer.all.sort_by(&:average_rating).reverse.first(num)
-  end
+  # def self.top(amount)
+  #  sorted_by_rating_in_desc_order = Beer.all.sort_by{ |b| -(b.average_rating || 0) }
+  #  sorted_by_rating_in_desc_order[0, amount]
+  # end
 end

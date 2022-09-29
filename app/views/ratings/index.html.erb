@@ -21,7 +21,7 @@
       </tr>
     </thead>
 
-    <% @beers.each do |beer| %>
+    <% @top_beers.each do |beer| %>
       <tr id="<%= dom_id beer %>">
         <th><%= beer.name  %></th>
         <th><%= beer.average_rating  %></th>
@@ -39,7 +39,7 @@
         <th scope="col">Rating</th>
       </tr>
     </thead>
-    <% @breweries.each do |brewery| %>
+    <% @top_breweries.each do |brewery| %>
       <tr id="<%= dom_id brewery %>">
         <th><%= brewery.name %></th>
         <th><%= brewery.average_rating  %></th>
@@ -58,7 +58,7 @@
         <th scope="col">Rating</th>
       </tr>
     </thead>
-    <% @styles.each do |style| %>
+    <% @top_styles.each do |style| %>
       <tr id="<%= dom_id style %>">
         <th><%= style.name %></th>
         <th><%= round(style.average_rating)  %></th>
@@ -71,7 +71,7 @@
 
 <p id="bestUsers">
 <h2>Most active users</h2>
-    <% @users.each_with_index do |user, i| %>
+    <% @top_users.each_with_index do |user, i| %>
       <div id="<%= dom_id user %>">
       <%= i+1 %>. <%= user.username %> <%= user.ratings.count  %> ratings
       </div>
